@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Un test de JavaScript</title>
+</head>
+
+<body>
+
+	<p><B>Voici un Formulaire, Veuillez entrer votre information puis cliquer sur Valider.</B></p>
+
+	<p>
+		<input id="field" type="text" onFocus="javascript:this.value=''" value="Entrer Prenom et Nom"/> 
+	
+	
+	<label> Vous êtes : </label><br />
+	<label><input type="radio" name="check" value="1" checked = true /> Francais</label><br />
+	<label><input type="radio" name="check" value="2" /> Anglais</label><br />
+	<label><input type="radio" name="check" value="3" /> Chinois</label><br />
+	<label><input type="radio" name="check" value="4" /> Allemand</label>
+	<br /><br />
+	
+	<select id="list">
+		<option>Sélectionnez votre sexe</option>
+		<option>Homme</option>
+		<option>Femme</option>
+	</select>
+	<br /><br />
+	<input id="bouton" type="button" value="Valider" onclick="check();" />
+
+	<br /><br />
+	<a id="myLink" href="Pas de lien">Un lien qui va vous rediriger vers prochain page de test</a>
+
+		
+</body>
+
+	<script>
+        var link = document.getElementById('myLink');
+        link.onclick = function(){ alert("Le site va être redirigé!");}
+        link.href = 'test2.html'; // On édite l'attribut « href »
+		link.addEventListener('click', function() { alert("Le site va vraiment être redirigé!");});
+		
+		function check(){
+			var inputs = document.querySelectorAll('input[type=radio]:checked');
+			var nb = inputs[0].value;
+			var pays, sexe, prenom, alertMessage;
+			
+			var field = document.getElementById("field");
+			if(field.value == "Entrer Prenom et Nom"){
+				alertMessage = "Veuillez Entrer votre prenom et nom SVP!\n";
+				field.style.backgroundColor = 'red';
+			}
+			else{
+				alertMessage = "Vous vous appelez " + field.value + "\n";
+				field.style.backgroundColor = 'white';
+			}
+			
+			if(nb == 1) pays = "Francais";
+			if(nb == 2) pays = "Anglais";
+			if(nb == 3) pays = "Chinois";
+			if(nb == 4) pays = "Allemand";
+			alertMessage = alertMessage + "Vous êtes donc un " + pays + "\n";
+			
+			var list = document.getElementById("list");
+			if(list.selectedIndex != 0) {
+				sexe = list.options[list.selectedIndex].innerHTML;
+				alertMessage = alertMessage + "Vous êtes un " + sexe;
+				list.style.backgroundColor = 'white';
+			}
+			else{
+				list.style.backgroundColor = 'red';
+				alertMessage = alertMessage + "Vous n'avez pas de sexe";
+			}
+			alert(alertMessage);
+		}
+	</script>
+	
+</body>
+</html>
